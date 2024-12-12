@@ -24,3 +24,20 @@ def create_user():
     users[next_id] = user
     next_id += 1
     return '', 201
+
+@app.route('/users/<int:user_id>', methods=['PATCH'])
+def update_user(user_id):
+    data = request.get_json()
+    user = users.get(user_id)
+    if user:
+        user.update({key: var for key ,var in data.items() if key in user})
+        return '', 204
+    else:
+        return '', 400
+
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    data = request.get_json()
+    user = users.get(user_id)
+
+
