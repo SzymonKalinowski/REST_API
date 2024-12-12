@@ -14,7 +14,7 @@ def get_user(user_id):
     user = users.get(user_id)
     if user:
         return jsonify(user), 200
-    return '', 404
+    return '', 400
 @app.route('/users', methods=['POST'])
 def create_user():
     global next_id
@@ -34,7 +34,7 @@ def patch_user(user_id):
         return '', 204
     else:
         return '', 400
-    return '', 404
+    return '', 400
 @app.route('/users/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     data = request.get_json()
@@ -50,7 +50,7 @@ def delete_user(user_id):
         return '', 204
     else:
         return '', 400
-    return '', 404
+    return '', 400
 
 if __name__ == '__main__':
     app.run(debug=True)
