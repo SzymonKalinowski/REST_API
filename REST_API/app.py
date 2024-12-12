@@ -35,6 +35,12 @@ def update_user(user_id):
     else:
         return '', 400
 
+@app.route('/users/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    data = request.get_json()
+    users[user_id] = {"id": user_id, "name": data["name"], "lastname": data["lastname"]}
+    return '', 204
+
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     data = request.get_json()
