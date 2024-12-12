@@ -14,6 +14,13 @@ def get_user(user_id):
     user = users.get(user_id)
     if user:
         return jsonify(user), 200
-    else:
-        return '', 400
 
+@app.route('/users', methods=['POST'])
+def create_user():
+    global next_id
+    user_id = next_id
+    data = request.get_json()
+    user = {"id": next_id, "name": data["name"], "lastname": data["lastname"]}
+    users[next_id] = user
+    next_id += 1
+    return '', 201
