@@ -39,5 +39,11 @@ def update_user(user_id):
 def delete_user(user_id):
     data = request.get_json()
     user = users.get(user_id)
+    if user_id in users:
+        del users[user_id]
+        return '', 204
+    else:
+        return '', 400
 
-
+if __name__ == '__main__':
+    app.run(debug=True)
